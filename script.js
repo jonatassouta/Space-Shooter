@@ -1,9 +1,11 @@
 const yourShip = document.querySelector('.player-shooter');
 const playArea = document.querySelector('#main-play-area');
-const aliensImg = ['img/monster-1.png', "img/monster-2.png", "img/monster-3.png", "img/shipAlien.png"];
+const aliensImg = ['img/monster-1.png', "img/monster-2.png", "img/shipAlien.png", "img/monster-3.png"];
 const instructionsText = document.querySelector('.game-instructions');
 const startButton = document.querySelector('.start-button');
 let alienInterval;
+let placar = document.querySelector('.placar');
+let i = 0;
 
 //Movimento e tiro da nave
 function flyAhip(event) {
@@ -33,7 +35,7 @@ function moveUp() {
         return
     } else {
         let position = parseInt(topPosition);
-        position -= 50;
+        position -= 30;
         yourShip.style.top = `${position}px`;
     } 
 }
@@ -45,7 +47,7 @@ function moveDow() {
         return
     } else {
         let position = parseInt(topPosition);
-        position += 50
+        position += 30
         yourShip.style.top = `${position}px`;
     } 
 }
@@ -96,10 +98,12 @@ function moveLaser(laser) {
         let aliens = document.querySelectorAll('.alien');
 
         aliens.forEach((alien) => { //Comparando se cada alien foi atingido, se sim, trocar o src da imagen
-            if(checkLaserCollision(laser, alien)) {
+            if(checkLaserCollision(laser, alien, i)) {
                 alien.src = 'img/explosion-1.png';
                 alien.classList.remove('alien');
                 alien.classList.add('dead-alien');
+                i++;
+                placar.textContent = i;
             }
         })
 
@@ -135,7 +139,13 @@ function  moveAlien(alien) {
                 gameOver();
             }
         } else {
-            alien.style.left = `${xPosition - 4}px`;
+            if(i >= 5) {
+                alien.style.left = `${xPosition - 7}px`;
+            } else if ( i >= 10){
+                alien.style.left = `${xPosition - 10}px`;
+            } else {
+                alien.style.left = `${xPosition - 4}px`;
+            }
         }
     }, 30);
 }
@@ -181,10 +191,13 @@ function  gameOver() {
     aliens.forEach((alien) => alien.remove());
     let lasers = document.querySelectorAll('.laser');
     lasers.forEach((laser) => laser.remove());
+    let s = placar.textContent;
+    placar.textContent = 0;
     setTimeout(() => {
-        alert('Game Over!!');
+        alert('Game Over!! seu Placar é de: ' + s);
         yourShip.style.top = "250px";
         startButton.style.display = 'block';
         instructionsText.style.display = "block";
     });
 }
+
