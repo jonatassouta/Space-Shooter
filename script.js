@@ -142,7 +142,7 @@ function  moveAlien(alien) {
             if(i >= 5) {
                 alien.style.left = `${xPosition - 7}px`;
             } else if ( i >= 10){
-                alien.style.left = `${xPosition - 10}px`;
+                alien.style.left = `${xPosition - 14}px`;
             } else {
                 alien.style.left = `${xPosition - 4}px`;
             }

@@ -11,6 +11,7 @@ body {
 }
 
 #main-play-area {
+    border-radius: 10px;
     background-color: black;
     background-image: url(img/space.png);
     background-size: 100%;
@@ -64,4 +65,14 @@ body {
     width: 110px;
     position: relative;
     opacity: 0;
+}
+
+.placar-div {
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+    margin-right: 50px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100px;
 }
